@@ -23,18 +23,30 @@ void moveStackOfPairs(int n, string a, string b, string c) {
 
         //move a disk from A to C
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << a << " to peg " << c << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         //move a disk from A to B
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << a << " to peg " << b << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         //move a disk from C to B
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << c << " to peg " << b << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
     } else {
         cout << "BANANA ";
@@ -43,25 +55,41 @@ void moveStackOfPairs(int n, string a, string b, string c) {
         
         //move a disk from A to C
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << a << " to peg " << c << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
         
         //move another disk from A to C
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << a << " to peg " << c << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         moveStackOfPairs((n-1), b, a, c);
 
         //move a disk from C to B
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << c << " to peg " << b << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         //move another disk from C to B
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << c << " to peg " << b << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         moveStackOfPairs((n-1), a, b, c);
     }
@@ -73,13 +101,21 @@ void solveHuger(int n, string a, string b, string c) {
 
         //move a disk from A to C
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << a << " to peg " << c << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         //move a disk from A to B
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << a << " to peg " << b << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
     } else {
         cout << "GRAPE ";
@@ -88,20 +124,32 @@ void solveHuger(int n, string a, string b, string c) {
 
         //move a disk from A to C
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << a << " to peg " << c << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         //move a disk from A to B
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << a << " to peg " << c << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         moveStackOfPairs((n-1), a, b, c);
         
         //move disk from C to B
         stepCounter++;
-        cout << "Step " << stepCounter << ": ";
+        cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << c << " to peg " << b << ".";
         cout << endl;
+
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
 
         solveHuger((n-1), a, b, c);
     }
@@ -123,19 +171,31 @@ int main(int argc, char* argv[]) {
     int c = 2;
 */
 
-    string a = "A";
-    string b = "B";
-    string c = "C";
+    string a = "0";
+    string b = "1";
+    string c = "2";
     
+
+
 //HOW DO I MAKE A1 B2 C3 LIKE ???
 
+
+
     while(cin.good()) { 
+        cout << "Starting At:" << endl;
+        cout << " 0:" << "____" << endl;
+        cout << " 1:" << "____" << endl;
+        cout << " 2:" << "____" << endl;
         solveHuger(n, a, b, c);
         cout << "Done!";
         stepCounter = 0;
         cin >> n;
     }
 }
+
+
+
+
 
 
 
