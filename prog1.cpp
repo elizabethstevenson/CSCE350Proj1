@@ -6,12 +6,14 @@
 #include <stack>
 #include <sstream>
 #include <bits/stdc++.h>
+#include <vector>
 using std::cout;
 using std::cin;
 using std::endl;
 using std::string;
 using std::stringstream;
 using std::stack;
+using std::vector;
 
 /*
  n = number of garnet and black pairs
@@ -20,67 +22,62 @@ using std::stack;
  c = temp pole ---> 2
 */
 
-int stepCounter = 0; //used to show number of steps
+unsigned int stepCounter = 0; //used to show number of steps
 
 //3 pegs
-stack<string> peg0;
-stack<string> peg1;
-stack<string> peg2;
+vector<string> peg0;
+vector<string> peg1;
+vector<string> peg2;
 
-stack<string> pegTemp;
+vector<string> pegTemp;
 
 //prints which certain disk moved from certain peg to certain peg
-void printStep(int n, int from, int to) {
+void printStep(string n, int from, int to) {
     stepCounter++;
     cout << "Step " << stepCounter << ": Move disk " << n << " from peg " << from << " to peg " << to << ".";
     cout << endl;
 }
 
 
-//stack printer
-void printStack(stack<string> s) {
-    if(s.empty()) {
-        return;
+//entire vector printer
+void printVector(vector<string> s) {
+    for (unsigned int i = 0; i < s.size(); i++) {
+        cout << s.at(i);
     }
-    string value = s.top();
-    s.pop();
-    printStack(s);
-    cout << value;
-    s.push(value);
 }
 
 //prints pegs
 void printPegStatus() {
     cout << " 0:";
-    printStack(peg0);
+    printVector(peg0);
     cout << endl;
     cout << " 1:";
-    printStack(peg1);
+    printVector(peg1);
     cout << endl;
     cout << " 2:";
-    printStack(peg2);
+    printVector(peg2);
     cout << endl;
 }
 
-void moveStackOfPairs(int n, int a, int b, int c) {
-    if(n<2) {
+void moveStackOfPairs(string n, int a, int b, int c) {
+    if(n.length()<2) {
         cout << "APPLE ";
 
 
         //move a disk from A to C
-        printStep(n, a, c);
+        printStep(n.at(n.length()-1), a, c);
         //MOVE PEG
         printPegStatus();
 
 
         //move a disk from A to B
-        printStep(n, a, b);
+        printStep(n.at(n.length()-1), a, b);
         //MOVE PEG
         printPegStatus();
 
 
         //move a disk from C to B
-        printStep(n, c, b);
+        printStep(n.at(n.length()-1), c, b);
         //MOVE PEG
         printPegStatus();
 
@@ -88,85 +85,83 @@ void moveStackOfPairs(int n, int a, int b, int c) {
         cout << "BANANA ";
 
 
-        moveStackOfPairs((n-1), a, b, c);
+        moveStackOfPairs((n.at(n.length()-2)), a, b, c);
         
 
         //move a disk from A to C
-        printStep(n, a, c);
+        printStep(n.at(n.length()-1), a, c);
         //MOVE PEG
         printPegStatus();
         
 
         //move another disk from A to C
-        printStep(n, a, c);
+        printStep(n.at(n.length()-1), a, c);
         //MOVE PEG
         printPegStatus();
 
 
-        moveStackOfPairs((n-1), b, a, c);
+        moveStackOfPairs((n.at(n.length()-2)), b, a, c);
 
 
         //move a disk from C to B
-        printStep(n, c, b);
+        printStep(n.at(n.length()-1), c, b);
         //MOVE PEG
         printPegStatus();
 
 
         //move another disk from C to B
-        printStep(n, c, b);
+        printStep(n.at(n.length()-1), c, b);
         //MOVE PEG
         printPegStatus();
 
 
-        moveStackOfPairs((n-1), a, b, c);
+        moveStackOfPairs((n.at(n.length()-2)), a, b, c);
     }
 }
 
-void solveHuger(int n, int a, int b, int c) {
-    if(n<2) {
+void solveHuger(string n, int a, int b, int c) {
+    if(n.length()<2) {
         cout << "ORANGE ";
 
 
         //move a disk from A to C
-        printStep(n, a, c);
+        printStep(n.at(n.length()-1), a, c);
         //MOVE PEG
         printPegStatus();
 
 
         //move a disk from A to B
-        printStep(n, a, b);
+        printStep(n.at(n.length()-1), a, b);
         //MOVE PEG
         printPegStatus();
 
     } else {
         cout << "GRAPE ";
 
-
-        moveStackOfPairs((n-1), a, b, c);
-
+        moveStackOfPairs((n.at(n.length()-2)), a, b, c);
 
         //move a disk from A to C
-        printStep(n, a, c);
+        printStep(n.at(n.length()-1), a, c);
         //MOVE PEG
         printPegStatus();
 
 
         //move a disk from A to B
-        printStep(n, a, b);
+        printStep(n.at(n.length()-1), a, b);
         //MOVE PEG
         printPegStatus();
 
 
-        moveStackOfPairs((n-1), a, b, c);
+        moveStackOfPairs((n.at(n.length()-1)), a, b, c);
 
         
         //move disk from C to B
-        printStep(n, c, b);
+        printStep(n.at(n.length()-1), c, b);
         //MOVE PEG
         printPegStatus();
 
 
-        solveHuger((n-1), a, b, c);
+        solveHuger((n.at(n.length()-2)), a, b, c);
     }
 }
 
@@ -191,31 +186,33 @@ int main(int argc, char* argv[]) {
         letterLetter >> letter;
         numberNumber << addNumber;
         numberNumber >> number;
-        pegTemp.push(letter);
-        peg0.push(letter);
-        pegTemp.push(number);
-        peg0.push(number);
+        pegTemp.push_back(letter);
+        peg0.push_back(letter);
+        pegTemp.push_back(number);
+        peg0.push_back(number);
     }
 
     string tower;
-    for(int i = pegTemp.size(); i > 0; i--){
-        tower += pegTemp.top();
-        pegTemp.pop();
+    for(unsigned int i = 0; i < pegTemp.size(); ++i){
+        tower += pegTemp.at(i);
     }
-    reverse(tower.begin(), tower.end());
+    //reverse(tower.begin(), tower.end());
+
 
     while(cin.good()) { 
         cout << "Starting At:" << endl;
         printPegStatus();
-        solveHuger(n, a, b, c);
-        cout << "Done!";
+        solveHuger(tower, a, b, c);
+        cout << "Done!" << endl;
         stepCounter = 0;
+        peg0.clear();
+        peg1.clear();
+        peg2.clear();
         cin >> n;
     }
 
     return 0;
 }
-
 
 
 
