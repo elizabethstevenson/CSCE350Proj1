@@ -14,6 +14,7 @@ using std::string;
 using std::stringstream;
 using std::stack;
 using std::vector;
+using std::move;
 
 /*
  n = number of garnet and black pairs
@@ -65,57 +66,71 @@ void moveStackOfPairs(string n, int a, int b, int c) {
 
 
         //move a disk from A to C
-        printStep(n.at(n.length()-1), a, c);
+        printStep(n, a, c);
         //MOVE PEG
+        peg2.end() = move(peg0.end());
+        //move(peg0.end(), peg2.end());
         printPegStatus();
 
 
         //move a disk from A to B
-        printStep(n.at(n.length()-1), a, b);
+        printStep(n, a, b);
         //MOVE PEG
+        peg1.end() = move(peg0.end());
+        //move(peg0.end(), peg1.end());
         printPegStatus();
 
 
         //move a disk from C to B
-        printStep(n.at(n.length()-1), c, b);
+        printStep(n, c, b);
         //MOVE PEG
+        peg2.end() = move(peg1.end());
+        //move(peg2.end(), peg1.end());
         printPegStatus();
 
     } else {
         cout << "BANANA ";
 
 
-        moveStackOfPairs((n.at(n.length()-2)), a, b, c);
+        moveStackOfPairs(n.at(pegTemp.size()-1), a, b, c);
         
 
         //move a disk from A to C
-        printStep(n.at(n.length()-1), a, c);
+        printStep(n, a, c);
         //MOVE PEG
+        peg2.end() = move(peg0.end());
+        //move(peg0.end(), peg2.end());
         printPegStatus();
         
 
         //move another disk from A to C
-        printStep(n.at(n.length()-1), a, c);
+        printStep(n, a, c);
         //MOVE PEG
+        peg2.end() = move(peg0.end());
+        //move(peg0.end(), peg2.end());
         printPegStatus();
 
 
-        moveStackOfPairs((n.at(n.length()-2)), b, a, c);
+        moveStackOfPairs(n.at(pegTemp.size()-1), b, a, c);
 
 
         //move a disk from C to B
-        printStep(n.at(n.length()-1), c, b);
+        printStep(n, c, b);
         //MOVE PEG
+        peg1.end() = move(peg2.end());
+        //move(peg2.end(), peg1.end());
         printPegStatus();
 
 
         //move another disk from C to B
-        printStep(n.at(n.length()-1), c, b);
+        printStep(n, c, b);
         //MOVE PEG
+        peg1.end() = move(peg2.end());
+        //move(peg2.end(), peg1.end());
         printPegStatus();
 
 
-        moveStackOfPairs((n.at(n.length()-2)), a, b, c);
+        moveStackOfPairs(n.at(pegTemp.size()-1), a, b, c);
     }
 }
 
@@ -125,43 +140,53 @@ void solveHuger(string n, int a, int b, int c) {
 
 
         //move a disk from A to C
-        printStep(n.at(n.length()-1), a, c);
+        printStep(n, a, c);
         //MOVE PEG
+        peg2.end() = move(peg0.end());
+        //move(peg0.end(), peg2.end());
         printPegStatus();
 
 
         //move a disk from A to B
-        printStep(n.at(n.length()-1), a, b);
+        printStep(n, a, b);
         //MOVE PEG
+        peg1.end() = move(peg0.end());
+        //move(peg0.end(), peg1.end());
         printPegStatus();
 
     } else {
         cout << "GRAPE ";
 
-        moveStackOfPairs((n.at(n.length()-2)), a, b, c);
+        moveStackOfPairs(n.at(pegTemp.size()-1), a, b, c);
 
         //move a disk from A to C
-        printStep(n.at(n.length()-1), a, c);
+        printStep(n, a, c);
         //MOVE PEG
+        peg2.end() = move(peg0.end());
+        //move(peg0.end(), peg2.end());
         printPegStatus();
 
 
         //move a disk from A to B
-        printStep(n.at(n.length()-1), a, b);
+        printStep(n, a, b);
         //MOVE PEG
+        peg1.end() = move(peg0.end());
+        //move(peg0.end(), peg1.end());
         printPegStatus();
 
 
-        moveStackOfPairs((n.at(n.length()-1)), a, b, c);
+        moveStackOfPairs(n.at(pegTemp.size()-1), a, b, c);
 
         
         //move disk from C to B
-        printStep(n.at(n.length()-1), c, b);
+        printStep(n, c, b);
         //MOVE PEG
+        peg1.end() = move(peg2.end());
+        //move(peg2.end(), peg1.end());
         printPegStatus();
 
 
-        solveHuger((n.at(n.length()-2)), a, b, c);
+        solveHuger(n.at(pegTemp.size()-1), a, b, c);
     }
 }
 
@@ -213,10 +238,6 @@ int main(int argc, char* argv[]) {
 
     return 0;
 }
-
-
-
-
 
 
 
