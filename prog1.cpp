@@ -67,95 +67,113 @@ void printPegStatus() {
  * to int to show that. The comments behind the recursion were code that 
  * I was trying to do when n was a string and trying to go through each character.
  * I was trying a lot of different approaches with the recurions with the string
- * but all the trials led to errors.
+ * but all the trials led to errors. I think that I was close with the moving
+ * part but it was really the parameters and their types that messed me up.
+ * My first approach to the moving showed all the steps but didn't show any
+ * moving. The implemented approach shows some moving but it shows a segment fault.
 */
 void moveStackOfPairs(int n, int a, int b, int c) {
     if(n<2) {
         //move a disk from A to C
         printStep(n, a, c);
-        peg2.end() = move(peg0.end()); //move(peg0.end(), peg2.end());
+        //peg2.end() = peg0.end(); move peg0.end() ---> peg2.end();
+        peg2.push_back(peg0.back());
+        peg0.pop_back();
         printPegStatus();
-
 
         //move a disk from A to B
         printStep(n, a, b);
-        peg1.end() = move(peg0.end()); //move(peg0.end(), peg1.end());
+        //peg1.end() = peg0.end(); move peg0.end() ---> peg1.end();
+        peg1.push_back(peg0.back());
+        peg0.pop_back();
         printPegStatus();
-
 
         //move a disk from C to B
         printStep(n, c, b);
-        peg2.end() = move(peg1.end()); //move(peg2.end(), peg1.end());
+        //peg2.end() = peg1.end(); move peg2.end() ---> peg1.end();
+        peg2.push_back(peg1.back());
+        peg1.pop_back();
         printPegStatus();
     } else {
         moveStackOfPairs(n-1, a, b, c); //moveStackOfPairs(n.at(pegTemp.size()-1), a, b, c);
         
         //move a disk from A to C
         printStep(n, a, c);
-        peg2.end() = move(peg0.end()); //move(peg0.end(), peg2.end());
+        //peg2.end() = peg0.end(); move peg0.end() ---> peg2.end()
+        peg2.push_back(peg0.back());
+        peg0.pop_back();
         printPegStatus();
         
         //move another disk from A to C
         printStep(n, a, c);
-        peg2.end() = move(peg0.end()); //move(peg0.end(), peg2.end());
+        //peg2.end() = peg0.end(); move peg0.end() ---> peg2.end()
+        peg2.push_back(peg0.back());
+        peg0.pop_back();
         printPegStatus();
 
         moveStackOfPairs(n-1, a, b, c); //moveStackOfPairs(n.at(pegTemp.size()-1), b, a, c);
 
         //move a disk from C to B
         printStep(n, c, b);
-        peg1.end() = move(peg2.end()); //move(peg2.end(), peg1.end());
+        //peg1.end() = peg2.end(); move peg2.end() ---> peg1.end()
+        peg2.push_back(peg1.back());
+        peg1.pop_back();
         printPegStatus();
 
         //move another disk from C to B
         printStep(n, c, b);
-        peg1.end() = move(peg2.end()); //move(peg2.end(), peg1.end());
+        //peg1.end() = peg2.end(); move peg2.end() --> peg1.end()
+        peg2.push_back(peg1.back());
+        peg1.pop_back();
         printPegStatus();
-
+        
         moveStackOfPairs(n, a, b, c); //moveStackOfPairs(n.at(pegTemp.size()-1), a, b, c);
     }
 }
 
-/* I also originally made the variable n a string so then the disks could 
- * go through the moves from peg to peg but it would not compile 
- * and would not show the labels for the pegs so I changed it back
- * to int to show that.  The comments behind the recursion were code that 
- * I was trying to do when n was a string and trying to go through each character.
- * I was trying a lot of different approaches with the recurions with the string
- * but all the trials led to errors.
+/* I also originally made the variable n a string like the earlier function.
+ * I wanted to show the printing and its formatting.  The comments behind the recursion are the same as up above.
+ * This was a lot of trial and error.
 */
 void solveHuger(int n, int a, int b, int c) {
     if(n<2) {
         //move a disk from A to C
         printStep(n, a, c);
-        peg2.end() = move(peg0.end()); //move(peg0.end(), peg2.end());
+        //peg2.end() = peg0.end(); move peg0.end() ---> peg2.end()
+        peg2.push_back(peg0.back());
+        peg0.pop_back();
         printPegStatus();
-
 
         //move a disk from A to B
         printStep(n, a, b);
-        peg1.end() = move(peg0.end()); //move(peg0.end(), peg1.end());
+        //peg1.end() = peg0.end(); move peg0.end() ---> peg1.end()
+        peg1.push_back(peg0.back());
+        peg1.pop_back();
         printPegStatus();
     } else {
         moveStackOfPairs(n-1, a, b, c); //moveStackOfPairs(n.at(pegTemp.size()-1), a, b, c);
 
         //move a disk from A to C
         printStep(n, a, c);
-        peg2.end() = move(peg0.end()); //move(peg0.end(), peg2.end());
+        //peg2.end() = peg0.end(); move peg0.end() ---> peg2.end()
+        peg2.push_back(peg0.back());
+        peg0.pop_back();
         printPegStatus();
-
 
         //move a disk from A to B
         printStep(n, a, b);
-        peg1.end() = move(peg0.end()); //move(peg0.end(), peg1.end());
+        //peg1.end() = peg0.end(); move peg0.end() ---> peg1.end()
+        peg1.push_back(peg0.back());
+        peg0.pop_back();
         printPegStatus();
 
         moveStackOfPairs(n-1, a, b, c); //moveStackOfPairs(n.at(pegTemp.size()-1), a, b, c);
-
         
         //move disk from C to B
         printStep(n, c, b);
-        peg1.end() = move(peg2.end()); //move(peg2.end(), peg1.end());
+        //peg1.end() = peg2.end(); move peg2.end() ---> peg1.end()
+        peg2.push_back(peg1.back());
+        peg1.pop_back();
         printPegStatus();
 
         solveHuger(n-1, a, b, c); //solveHuger(n.at(pegTemp.size()-1), a, b, c);
@@ -191,7 +209,7 @@ int main(int argc, char* argv[]) {
 
     //making a string with A1B2C3...
     string tower;
-    for(unsigned int i = 0; i < pegTemp.size(); ++i){
+    for(unsigned int i = 0; i < pegTemp.size(); ++i) {
         tower += pegTemp.at(i);
     }
 
@@ -206,8 +224,8 @@ int main(int argc, char* argv[]) {
         peg0.clear();
         peg1.clear();
         peg2.clear();
+        //allows another user input
         cin >> n;
     }
-
     return 0;
 }
